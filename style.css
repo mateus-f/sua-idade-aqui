@@ -1,0 +1,139 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--font-family);
+}
+
+:root {
+	--font-family: "Poppins", sans-serif;
+	--purple-500: hsl(259, 100%, 65%);
+	--red-400: hsl(0, 100%, 67%);
+	--white: hsl(0, 100%, 100%);
+	--grey-100: hsl(0, 0%, 94%);
+	--grey-200: hsl(0, 0%, 86%);
+	--grey-500: hsl(0, 1%, 44%);
+	--black: hsl(0, 0%, 0%);
+	--container-br: 1rem 1rem 7rem 1rem;
+	--border-radius: 0.5rem;
+	--transition: 0.2s all ease-in-out;
+}
+
+body {
+	position: relative;
+	background: var(--grey-100);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100%;
+}
+
+#container {
+	min-width: 500px;
+	padding: 2rem;
+	border-radius: var(--container-br);
+	background: var(--white);
+
+	#input-fields {
+		display: flex;
+		gap: 1.25rem;
+
+		.input-field {
+			display: flex;
+			flex-direction: column;
+
+			label {
+				color: var(--grey-500);
+				font-weight: 600;
+				font-size: 0.625rem;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				transition: var(--transition);
+			}
+
+			input {
+				max-width: 6.25rem;
+				padding: 0.625rem;
+				border-radius: var(--border-radius);
+				border: 1px solid var(--grey-200);
+				font-size: 1rem;
+				font-weight: 800;
+				margin-block: 5px;
+				transition: var(--transition);
+
+				&.error {
+					border: 1px solid var(--red-400);
+				}
+
+				&::placeholder {
+					color: var(--grey-500);
+				}
+			}
+
+			.error:not(input) {
+				color: var(--red-400);
+			}
+
+			.alert {
+				font-style: italic;
+				font-size: 0.625rem;
+			}
+		}
+	}
+
+	#middle-line {
+		display: flex;
+		width: 100%;
+		position: relative;
+		justify-content: end;
+
+		#line {
+			z-index: 0;
+			bottom: 50%;
+			position: absolute;
+			height: 1px;
+			width: 100%;
+			background-color: var(--grey-200);
+		}
+
+		#submit-button {
+			z-index: 1;
+			width: 50px;
+			height: 50px;
+			background: var(--purple-500);
+			border: none;
+			padding: 0.625rem;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: var(--transition);
+
+			&:is(:hover, :focus) {
+				background: var(--black);
+			}
+
+			img {
+				width: 25px;
+				height: 25px;
+			}
+		}
+	}
+
+	#results {
+		p {
+			font-size: 3rem;
+			font-weight: 800;
+			font-style: italic;
+
+			span {
+				color: var(--purple-500);
+			}
+		}
+	}
+}
+
+#attribution {
+	font-size: .625rem;
+	position: absolute;
+	bottom: 10px;
+}
