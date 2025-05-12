@@ -8,33 +8,32 @@ const form = document.querySelector("form"),
 let dayAlert = document.querySelector("#input-day + .alert"),
 	monthAlert = document.querySelector("#input-month + .alert"),
 	yearAlert = document.querySelector("#input-year + .alert"),
-  outputYears = document.getElementById("output-years"),
-  outputMonths = document.getElementById("output-months"),
-  outputDays = document.getElementById("output-days"),
+	outputYears = document.getElementById("output-years"),
+	outputMonths = document.getElementById("output-months"),
+	outputDays = document.getElementById("output-days"),
 	message = "";
 
-const today = new Date();
-console.log(today);
-
-const day = today.getDate();
-const month = today.getMonth() + 1; // Months are zero-based
-const year = today.getFullYear();
+const today = new Date(),
+	day = today.getDate(),
+	month = today.getMonth() + 1,
+	year = today.getFullYear();
 
 form.addEventListener("submit", (e) => {
-	console.log(`Day: ${inputDay.value}`);
-	console.log(`Month: ${inputMonth.value}`);
-	console.log(`Year: ${inputYear.value}`);
-
-	validateDate();
-	checkEmptyInput();
-
 	e.preventDefault();
+	checkEmptyInput();
+	console.log(
+		`day: ${inputDay.value}, month: ${inputMonth.value}, year: ${inputYear.value}`
+	);
 });
 
-function calculateAge() {
+function calculateElapsedTime() {
+	const yearValue = year - inputYear.value,
+		monthValue = month - inputMonth.value,
+		dayValue = day - inputDay.value;
 
-
-  
+	outputYears.innerText = yearValue;
+	outputMonths.innerText = monthValue < 0 ? monthValue + 12 : monthValue;
+	outputDays.innerText = dayValue < 0 ? dayValue + 30 : dayValue;
 }
 
 function validateDate() {
@@ -42,17 +41,22 @@ function validateDate() {
 
 	if (inputDay.value > 31 || inputDay.value < 1) {
 		setError(inputDay, dayAlert, `${message} day`);
-		clearInput(inputDay);
+		clearValue(inputDay);
 	}
 
 	if (inputMonth.value > 12 || inputMonth.value < 1) {
 		setError(inputMonth, monthAlert, `${message} month`);
-		clearInput(inputMonth);
+		clearValue(inputMonth);
 	}
 
 	if (inputYear.value > year) {
 		setError(inputYear, yearAlert, "Must be in the past");
-		clearInput(inputYear);
+		clearValue(inputYear);
+	}
+
+	if (inputYear.value < 0) {
+		setError(inputYear, yearAlert, `${message} year`);
+		clearValue(inputYear);
 	}
 }
 
@@ -69,6 +73,8 @@ function checkEmptyInput() {
 
 	if (inputYear.value === "") {
 		setError(inputYear, yearAlert, message);
+	} else {
+		validateDate();
 	}
 }
 
@@ -84,7 +90,7 @@ function setError(input, alert, message) {
 	}, timeOfExecutionMs);
 }
 
-function clearInput(e, value) {
+function clearValue(e, value) {
 	setTimeout(() => {
 		e.value = "";
 	}, timeOfExecutionMs);
