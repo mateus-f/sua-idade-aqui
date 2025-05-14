@@ -37,11 +37,10 @@ function calculateElapsedTime() {
 		months = today.getMonth() - target.getMonth(),
 		days = today.getDate() - target.getDate();
 
-	if (dayValue === "" || monthValue === "" || yearValue === "") {
+	if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
 		checkEmptyInput();
 		return;
 	}
-
 	if (days < 0) {
 		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 		days += prevMonth.getDate();
@@ -85,15 +84,9 @@ function validateDate() {
 function checkEmptyInput() {
 	message = "This field is required";
 
-	if (inputDay.value === "") {
-		setError(inputDay, dayAlert, message);
-	}
-
-	if (inputMonth.value === "") {
-		setError(inputMonth, monthAlert, message);
-	}
-
-	if (inputYear.value === "") {
+	if (!inputDay.value) setError(inputDay, dayAlert, message);
+	if (!inputMonth.value) setError(inputMonth, monthAlert, message);
+	if (!inputYear.value) {
 		setError(inputYear, yearAlert, message);
 	} else {
 		validateDate();
