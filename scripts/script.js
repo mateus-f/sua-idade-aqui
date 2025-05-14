@@ -20,20 +20,42 @@ const today = new Date(),
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
-	checkEmptyInput();
+	calculateElapsedTime();
+
 	console.log(
 		`day: ${inputDay.value}, month: ${inputMonth.value}, year: ${inputYear.value}`
 	);
 });
 
 function calculateElapsedTime() {
-	const yearValue = year - inputYear.value,
-		monthValue = month - inputMonth.value,
-		dayValue = day - inputDay.value;
+	const dayValue = parseInt(inputDay.value, 10),
+		monthValue = parseInt(inputMonth.value, 10) - 1,
+		yearValue = parseInt(inputYear.value, 10),
+		target = new Date(yearValue, monthValue, dayValue);
 
-	outputYears.innerText = yearValue;
-	outputMonths.innerText = monthValue < 0 ? monthValue + 12 : monthValue;
-	outputDays.innerText = dayValue < 0 ? dayValue + 30 : dayValue;
+	let years = year - target.getFullYear(),
+		months = today.getMonth() - target.getMonth(),
+		days = today.getDate() - target.getDate();
+
+	if (dayValue === "" || monthValue === "" || yearValue === "") {
+		checkEmptyInput();
+		return;
+	}
+
+	if (days < 0) {
+		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+		days += prevMonth.getDate();
+		months--;
+	}
+
+	if (months < 0) {
+		months += 12;
+		years--;
+	}
+
+	outputYears.innerText = years;
+	outputMonths.innerText = months;
+	outputDays.innerText = days;
 }
 
 function validateDate() {
