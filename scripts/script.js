@@ -1,3 +1,4 @@
+// Captch all the HTML elements
 const form = document.querySelector("form"),
 	inputDay = document.getElementById("input-day"),
 	inputMonth = document.getElementById("input-month"),
@@ -9,14 +10,16 @@ const form = document.querySelector("form"),
 	outputMonths = document.getElementById("output-months"),
 	outputDays = document.getElementById("output-days");
 
+// Fixed values
 const today = new Date(),
 	timeOfExecutionMs = 2000;
 
+// Manipulable values
 let message = "";
 
 form.addEventListener("submit", (e) => {
-	e.preventDefault(); 
-	checkEmptyInput()
+	e.preventDefault(); // Cancel the default form submission
+	checkEmptyInput();
 });
 
 function checkEmptyInput() {
@@ -39,8 +42,8 @@ function checkEmptyInput() {
 }
 
 function validateDate() {
-	let isValid = true; 
-	message = "Must be  valid";
+	let isValid = true; // Using the flag-basead validation
+	message = "Must be a valid";
 
 	if (inputDay.value > 31 || inputDay.value < 1) {
 		setError(inputDay, dayAlert, `${message} day`);
@@ -74,14 +77,15 @@ function calculateElapsedTime() {
 	const dayValue = parseInt(inputDay.value, 10),
 		monthValue = parseInt(inputMonth.value, 10) - 1,
 		yearValue = parseInt(inputYear.value, 10),
-		target = new Date(yearValue, monthValue, dayValue); 
-	
-let years = today.getFullYear() - target.getFullYear(),
+		target = new Date(yearValue, monthValue, dayValue); // Create a date object with the input values
+
+	// The difference between the two dates
+	let years = today.getFullYear() - target.getFullYear(),
 		months = today.getMonth() - target.getMonth(),
 		days = today.getDate() - target.getDate();
 
-	
-if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
+	// Routing to the necessary function
+	if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
 		checkEmptyInput();
 		return;
 	}
@@ -90,21 +94,21 @@ if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
 }
 
 function setOutput(year, month, day) {
-	
-if (day < 0) {
+	// If the day is negative, we need to borrow days from the previous month
+	if (day < 0) {
 		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 		day += prevMonth.getDate();
 		month--;
 	}
 
-	
-if (month < 0) {
+	// If the month is negative, we need to borrow months from the previous year
+	if (month < 0) {
 		month += 12;
 		year--;
 	}
 
-	
-outputYears.innerText = year;
+	// Setting the output values
+	outputYears.innerText = year;
 	outputMonths.innerText = month;
 	outputDays.innerText = day;
 }
@@ -114,8 +118,8 @@ function setError(input, alert, message) {
 	input.classList.add("error");
 	alert.innerText = message;
 
-	
-setTimeout(() => {
+	// Remove the error message after a certain time
+	setTimeout(() => {
 		input.previousElementSibling.classList.remove("error");
 		input.classList.remove("error");
 		alert.innerText = "";
