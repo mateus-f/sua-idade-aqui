@@ -64,6 +64,7 @@ body {
 
 				&.error {
 					border: 1px solid var(--red-400);
+					animation: bounce 0.2s ease-in-out 0s 2;
 				}
 
 				&::placeholder {
@@ -133,7 +134,25 @@ body {
 }
 
 #attribution {
-	font-size: .625rem;
+	font-size: 0.625rem;
 	position: absolute;
 	bottom: 10px;
+}
+
+@keyframes bounce {
+	0% {
+		transform: translateX(0);
+	}
+
+	25% {
+		transform: translateX(0.3125rem);
+	}
+
+	75% {
+		transform: translateX(-0.3125rem);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
 }
