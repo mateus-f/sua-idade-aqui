@@ -20,11 +20,7 @@ const today = new Date(),
 
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
-	calculateElapsedTime();
-
-	console.log(
-		`day: ${inputDay.value}, month: ${inputMonth.value}, year: ${inputYear.value}`
-	);
+	checkEmptyInput();
 });
 
 function calculateElapsedTime() {
@@ -41,6 +37,7 @@ function calculateElapsedTime() {
 		checkEmptyInput();
 		return;
 	}
+
 	if (days < 0) {
 		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 		days += prevMonth.getDate();
@@ -58,36 +55,51 @@ function calculateElapsedTime() {
 }
 
 function validateDate() {
+	let isValid = true;
 	message = "Must be a valid";
 
 	if (inputDay.value > 31 || inputDay.value < 1) {
 		setError(inputDay, dayAlert, `${message} day`);
-		clearValue(inputDay);
+		isValid = false;
 	}
 
 	if (inputMonth.value > 12 || inputMonth.value < 1) {
 		setError(inputMonth, monthAlert, `${message} month`);
-		clearValue(inputMonth);
+		isValid = false;
 	}
 
 	if (inputYear.value > year) {
 		setError(inputYear, yearAlert, "Must be in the past");
-		clearValue(inputYear);
+		isValid = false;
 	}
 
 	if (inputYear.value < 0) {
 		setError(inputYear, yearAlert, `${message} year`);
-		clearValue(inputYear);
+		isValid = false;
 	}
+
+	if (!isValid) {
+		clearOutput();
+		return;
+	}
+
+	calculateElapsedTime();
 }
 
 function checkEmptyInput() {
 	message = "This field is required";
 
-	if (!inputDay.value) setError(inputDay, dayAlert, message);
-	if (!inputMonth.value) setError(inputMonth, monthAlert, message);
+	if (!inputDay.value) {
+		setError(inputDay, dayAlert, message);
+		clearOutput();
+	}
+	if (!inputMonth.value) {
+		setError(inputMonth, monthAlert, message);
+		clearOutput();
+	}
 	if (!inputYear.value) {
 		setError(inputYear, yearAlert, message);
+		clearOutput();
 	} else {
 		validateDate();
 	}
@@ -109,4 +121,10 @@ function clearValue(e, value) {
 	setTimeout(() => {
 		e.value = "";
 	}, timeOfExecutionMs);
+}
+
+function clearOutput() {
+	outputDays.textContent = "--";
+	outputMonths.textContent = "--";
+	outputYears.textContent = "--";
 }
