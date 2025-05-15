@@ -2,89 +2,22 @@ const form = document.querySelector("form"),
 	inputDay = document.getElementById("input-day"),
 	inputMonth = document.getElementById("input-month"),
 	inputYear = document.getElementById("input-year"),
-	submitButton = document.getElementById("submit-button"),
-	timeOfExecutionMs = 2000;
-
-let dayAlert = document.querySelector("#input-day + .alert"),
+	dayAlert = document.querySelector("#input-day + .alert"),
 	monthAlert = document.querySelector("#input-month + .alert"),
 	yearAlert = document.querySelector("#input-year + .alert"),
 	outputYears = document.getElementById("output-years"),
 	outputMonths = document.getElementById("output-months"),
-	outputDays = document.getElementById("output-days"),
-	message = "";
+	outputDays = document.getElementById("output-days");
 
 const today = new Date(),
-	day = today.getDate(),
-	month = today.getMonth() + 1,
-	year = today.getFullYear();
+	timeOfExecutionMs = 2000;
+
+let message = "";
 
 form.addEventListener("submit", (e) => {
-	e.preventDefault();
-	checkEmptyInput();
+	e.preventDefault(); 
+	checkEmptyInput()
 });
-
-function calculateElapsedTime() {
-	const dayValue = parseInt(inputDay.value, 10),
-		monthValue = parseInt(inputMonth.value, 10) - 1,
-		yearValue = parseInt(inputYear.value, 10),
-		target = new Date(yearValue, monthValue, dayValue);
-
-	let years = year - target.getFullYear(),
-		months = today.getMonth() - target.getMonth(),
-		days = today.getDate() - target.getDate();
-
-	if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
-		checkEmptyInput();
-		return;
-	}
-
-	if (days < 0) {
-		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-		days += prevMonth.getDate();
-		months--;
-	}
-
-	if (months < 0) {
-		months += 12;
-		years--;
-	}
-
-	outputYears.innerText = years;
-	outputMonths.innerText = months;
-	outputDays.innerText = days;
-}
-
-function validateDate() {
-	let isValid = true;
-	message = "Must be a valid";
-
-	if (inputDay.value > 31 || inputDay.value < 1) {
-		setError(inputDay, dayAlert, `${message} day`);
-		isValid = false;
-	}
-
-	if (inputMonth.value > 12 || inputMonth.value < 1) {
-		setError(inputMonth, monthAlert, `${message} month`);
-		isValid = false;
-	}
-
-	if (inputYear.value > year) {
-		setError(inputYear, yearAlert, "Must be in the past");
-		isValid = false;
-	}
-
-	if (inputYear.value < 0) {
-		setError(inputYear, yearAlert, `${message} year`);
-		isValid = false;
-	}
-
-	if (!isValid) {
-		clearOutput();
-		return;
-	}
-
-	calculateElapsedTime();
-}
 
 function checkEmptyInput() {
 	message = "This field is required";
@@ -105,26 +38,92 @@ function checkEmptyInput() {
 	}
 }
 
+function validateDate() {
+	let isValid = true; 
+	message = "Must be  valid";
+
+	if (inputDay.value > 31 || inputDay.value < 1) {
+		setError(inputDay, dayAlert, `${message} day`);
+		isValid = false;
+	}
+
+	if (inputMonth.value > 12 || inputMonth.value < 1) {
+		setError(inputMonth, monthAlert, `${message} month`);
+		isValid = false;
+	}
+
+	if (inputYear.value > today.getFullYear()) {
+		setError(inputYear, yearAlert, "Must be in the past");
+		isValid = false;
+	}
+
+	if (inputYear.value < 0) {
+		setError(inputYear, yearAlert, `${message} year`);
+		isValid = false;
+	}
+
+	if (!isValid) {
+		clearOutput();
+		return;
+	}
+
+	calculateElapsedTime();
+}
+
+function calculateElapsedTime() {
+	const dayValue = parseInt(inputDay.value, 10),
+		monthValue = parseInt(inputMonth.value, 10) - 1,
+		yearValue = parseInt(inputYear.value, 10),
+		target = new Date(yearValue, monthValue, dayValue); 
+	
+let years = today.getFullYear() - target.getFullYear(),
+		months = today.getMonth() - target.getMonth(),
+		days = today.getDate() - target.getDate();
+
+	
+if (isNaN(dayValue) || isNaN(monthValue) || isNaN(yearValue)) {
+		checkEmptyInput();
+		return;
+	}
+
+	setOutput(years, months, days);
+}
+
+function setOutput(year, month, day) {
+	
+if (day < 0) {
+		const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+		day += prevMonth.getDate();
+		month--;
+	}
+
+	
+if (month < 0) {
+		month += 12;
+		year--;
+	}
+
+	
+outputYears.innerText = year;
+	outputMonths.innerText = month;
+	outputDays.innerText = day;
+}
+
 function setError(input, alert, message) {
 	input.previousElementSibling.classList.add("error");
 	input.classList.add("error");
-	alert.innerHTML = message;
+	alert.innerText = message;
 
-	setTimeout(() => {
+	
+setTimeout(() => {
 		input.previousElementSibling.classList.remove("error");
 		input.classList.remove("error");
-		alert.innerHTML = "";
-	}, timeOfExecutionMs);
-}
-
-function clearValue(e, value) {
-	setTimeout(() => {
-		e.value = "";
+		alert.innerText = "";
 	}, timeOfExecutionMs);
 }
 
 function clearOutput() {
-	outputDays.textContent = "--";
-	outputMonths.textContent = "--";
-	outputYears.textContent = "--";
+	outputDays.innerText = "--";
+	outputMonths.innerText = "--";
+	outputYears.innerText = "--";
 }
