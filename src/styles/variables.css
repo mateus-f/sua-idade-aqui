@@ -1,0 +1,15 @@
+:root {
+	--font-family: "Poppins", sans-serif;
+	--red-600: hsl(0, 73%, 53%);
+	--red-400: hsl(0, 100%, 67%);
+	--white: hsl(0, 100%, 100%);
+	--grey-100: hsl(0, 0%, 94%);
+	--grey-200: hsl(0, 0%, 86%);
+	--grey-500: hsl(0, 1%, 44%);
+	--black: hsl(0, 0%, 0%);
+	--box-br: 1rem 1rem 7rem 1rem;
+	--border-radius: 0.5rem;
+	--transition: 0.2s all ease-in-out;
+	--h1-size: 2.5rem;
+	--p-size: 0.875rem;
+}

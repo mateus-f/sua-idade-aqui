@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <title>Age calculator app</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Quanto tempo faz?</title>
+  <link rel="stylesheet" href="src/styles/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -16,49 +16,57 @@
 
 <body>
   <main>
-    <form id="container">
-      <!-- Inputs -->
-      <div id="input-fields">
-        <div class="input-field">
-          <label for="inputDay">Day</label>
-          <input type="number" id="input-day" placeholder="DD">
-          <span class="error alert"></span>
+    <img src="src/assets/images/shape-lg.svg" alt="" id="background-shape">
+    <div id="container">
+      <h1>Quanto tempo faz<img src="src/assets/images/question-mark.svg" alt="Question Mark"></h1>
+      <p>Seja um nascimento, uma promessa não cumprida ou a compra de um curso online, digite a data e descubra
+        exatamente
+        quanto
+        tempo passou.</p>
+      <form id="box">
+        <!-- Inputs -->
+        <div id="input-fields">
+          <div class="input-field">
+            <label for="inputDay">Dia</label>
+            <input type="number" id="input-day" placeholder="DD">
+            <span class="error alert"></span>
+          </div>
+          <div class="input-field">
+            <label for="inputMonth">Mês</label>
+            <input type="number" id="input-month" placeholder="MM">
+            <span class="error alert"></span>
+          </div>
+          <div class="input-field">
+            <label for="inputYear">Ano</label>
+            <input type="number" id="input-year" placeholder="AAAA">
+            <span class="error alert"></span>
+          </div>
         </div>
-        <div class="input-field">
-          <label for="inputMonth">Month</label>
-          <input type="number" id="input-month" placeholder="MM">
-          <span class="error alert"></span>
+        <!-- Middle line -->
+        <div id="middle-line">
+          <div id="line"></div>
+          <button type="submit" id="submit-button">
+            <img src="src/assets/icons/arrow-bottom.svg" alt="Submit arrow">
+          </button>
         </div>
-        <div class="input-field">
-          <label for="inputYear">Year</label>
-          <input type="number" id="input-year" placeholder="YYYY">
-          <span class="error alert"></span>
+        <!-- Results -->
+        <div id="results">
+          <p><span id="output-years">--</span> anos</p>
+          <p><span id="output-months">--</span> meses</p>
+          <p><span id="output-days">--</span> dias</p>
         </div>
-      </div>
-
-      <!-- Middle line -->
-      <div id="middle-line">
-        <div id="line"></div>
-        <button type="submit" id="submit-button">
-          <img src="assets/images/icon-arrow.svg" alt="Submit arrow">
-        </button>
-      </div>
-
-      <!-- Results -->
-      <div id="results">
-        <p><span id="output-years">--</span> years</p>
-        <p><span id="output-months">--</span> months</p>
-        <p><span id="output-days">--</span> days</p>
-      </div>
-
-    </form>
-
+      </form>
+    </div>
+    <img src="src/assets/images/boy-getting-a-clock.png" alt="Boy boy-getting-a-clock" id="boy">
+    <footer id="attribution">
+      <img src="src/assets/icons/trophy.svg" alt="">
+      <p>
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+        Coded by <a href="#">Mateus Ferreira</a>.
+      </p>
+    </footer>
   </main>
-  <div id="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Mateus Ferreira</a>.
-  </div>
-  <script src="scripts/script.js"></script>
+  <script src="src/scripts/script.js"></script>
 </body>
 
 </html>
