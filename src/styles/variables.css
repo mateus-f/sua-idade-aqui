@@ -1,5 +1,4 @@
 :root {
-	--font-family: "Poppins", sans-serif;
 	--red-600: hsl(0, 73%, 53%);
 	--red-400: hsl(0, 100%, 67%);
 	--white: hsl(0, 100%, 100%);
@@ -10,6 +9,9 @@
 	--box-br: 1rem 1rem 7rem 1rem;
 	--border-radius: 0.5rem;
 	--transition: 0.2s all ease-in-out;
-	--h1-size: 2.5rem;
-	--p-size: 0.875rem;
+	/* Typography  */
+	--font-family: "Poppins", sans-serif;
+	--h1-size: clamp(1.75rem, 3.5vw, 4rem);
+	--p-size: clamp(.875rem, 1vw, 1.5rem);
+	--middle-text: 0.75rem;
 }

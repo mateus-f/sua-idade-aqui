@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <title>Quanto tempo faz?</title>
+  <link rel="shortcut icon" href="src/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="src/styles/animations.css">
   <link rel="stylesheet" href="src/styles/style.css">
+  <link rel="stylesheet" href="src/styles/reset.css">
+  <link rel="stylesheet" href="src/styles/variables.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -16,10 +20,12 @@
 
 <body>
   <main>
-    <img src="src/assets/images/shape-lg.svg" alt="" id="background-shape">
+    <img src="src/assets/images/shape.svg" alt="" id="background-shape" aria-hidden="true">
     <div id="container">
+      <!-- Information -->
       <h1>Quanto tempo faz<img src="src/assets/images/question-mark.svg" alt="Question Mark"></h1>
-      <p>Seja um nascimento, uma promessa não cumprida ou a compra de um curso online, digite a data e descubra
+      <p id="description">Seja um nascimento, uma promessa não cumprida ou a compra de um curso online, digite a data e
+        descubra
         exatamente
         quanto
         tempo passou.</p>
@@ -56,15 +62,15 @@
           <p><span id="output-days">--</span> dias</p>
         </div>
       </form>
+      <footer id="attribution">
+        <img src="src/assets/icons/trophy.svg" alt="">
+        <p>
+          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. <br id="break-row">
+          Coded by <a href="#">Mateus Ferreira</a>.
+        </p>
+      </footer>
     </div>
-    <img src="src/assets/images/boy-getting-a-clock.png" alt="Boy boy-getting-a-clock" id="boy">
-    <footer id="attribution">
-      <img src="src/assets/icons/trophy.svg" alt="">
-      <p>
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Mateus Ferreira</a>.
-      </p>
-    </footer>
+    <img src="src/assets/images/boy-getting-a-clock.png" alt="Boy holding a clock" id="boy">
   </main>
   <script src="src/scripts/script.js"></script>
 </body>
