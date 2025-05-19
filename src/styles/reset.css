@@ -4,3 +4,22 @@
 	box-sizing: border-box;
 	font-family: var(--font-family);
 }
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--font-family);
+}
+
+img {
+	-webkit-user-drag: none;
+	pointer-events: none;
+	user-select: none;
+	-moz-user-select: none;
+}
+
+a {
+	color: var(--black);
+}
+
