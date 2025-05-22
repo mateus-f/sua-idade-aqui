@@ -23,7 +23,7 @@ form.addEventListener("submit", (e) => {
 });
 
 function checkEmptyInput() {
-	message = "This field is required";
+	message = "O campo é obrigatório";
 
 	if (!inputDay.value) {
 		setError(inputDay, dayAlert, message);
@@ -43,25 +43,25 @@ function checkEmptyInput() {
 
 function validateDate() {
 	let isValid = true; // Using the flag-basead validation
-	message = "Must be a valid";
+	message = "Deve ser um";
 
 	if (inputDay.value > 31 || inputDay.value < 1) {
-		setError(inputDay, dayAlert, `${message} day`);
+		setError(inputDay, dayAlert, `${message} dia válido`);
 		isValid = false;
 	}
 
 	if (inputMonth.value > 12 || inputMonth.value < 1) {
-		setError(inputMonth, monthAlert, `${message} month`);
+		setError(inputMonth, monthAlert, `${message} mês válido`);
 		isValid = false;
 	}
 
 	if (inputYear.value > today.getFullYear()) {
-		setError(inputYear, yearAlert, "Must be in the past");
+		setError(inputYear, yearAlert, "Deve ser no passado");
 		isValid = false;
 	}
 
 	if (inputYear.value < 0) {
-		setError(inputYear, yearAlert, `${message} year`);
+		setError(inputYear, yearAlert, `${message} ano válido`);
 		isValid = false;
 	}
 
@@ -80,7 +80,7 @@ function calculateElapsedTime() {
 		target = new Date(yearValue, monthValue, dayValue); // Create a date object with the input values
 
 	// The difference between the two dates
-	let years = today.getFullYear() - target.getFullYear(),
+	let years = today.getFullYear() - yearValue,
 		months = today.getMonth() - target.getMonth(),
 		days = today.getDate() - target.getDate();
 
