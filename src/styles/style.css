@@ -172,6 +172,14 @@ main {
 	p {
 		font-size: var(--middle-text);
 		font-weight: 300;
+
+		a{
+			transition: var(--transition);
+		}
+
+		a:is(:hover, :focus){
+			color: var(--red-600);
+		}
 	}
 }
 
